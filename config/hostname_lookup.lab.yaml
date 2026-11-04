@@ -1,0 +1,16 @@
+sites:
+  - name: lab-site1-table
+    type: table
+    url: "https://127.0.0.1:5000/search"
+    search_param_name: search
+    verify_ssl: false
+    hostname_index: 0
+    ip_index: 1
+    require_td_align_center: false
+
+  - name: lab-site2-input
+    type: input
+    url: "https://127.0.0.1:5002/search"
+    search_param_name: search
+    verify_ssl: false
+    require_td_align_center: false

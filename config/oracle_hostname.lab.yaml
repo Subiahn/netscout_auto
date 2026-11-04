@@ -1,0 +1,23 @@
+oracle:
+  connect_identifier: "//localhost:1521/XE"
+  username: "NETSCOUT_LAB"
+  sqlplus_command:
+    - "docker"
+    - "exec"
+    - "-i"
+    - "netscout-oracle11g-lab"
+    - "sqlplus"
+    - "-s"
+    - "/nolog"
+  password_file: "oracle11g-lab-app.password"
+  timeout: 180
+
+query:
+  sql: >-
+    SELECT HOSTNAME
+    FROM HOSTNAME_LOOKUP
+    WHERE IP_ADDRESS = '{{IP}}'
+      AND ROWNUM = 1
+
+output:
+  source_name: "Oracle 11g Docker Lab"

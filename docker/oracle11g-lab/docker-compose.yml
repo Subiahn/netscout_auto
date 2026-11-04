@@ -1,0 +1,32 @@
+services:
+  oracle11g:
+    image: gvenzl/oracle-xe:11
+    container_name: netscout-oracle11g-lab
+    ports:
+      - "1521:1521"
+    shm_size: "1gb"
+    environment:
+      ORACLE_PASSWORD_FILE: /run/secrets/oracle_password
+      APP_USER: NETSCOUT_LAB
+      APP_USER_PASSWORD_FILE: /run/secrets/app_user_password
+    secrets:
+      - oracle_password
+      - app_user_password
+    volumes:
+      - oracle11g_data:/u01/app/oracle/oradata
+      - ./init:/container-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD", "healthcheck.sh"]
+      interval: 10s
+      timeout: 5s
+      retries: 30
+      start_period: 60s
+
+secrets:
+  oracle_password:
+    file: ../../config/oracle11g-lab-system.password
+  app_user_password:
+    file: ../../config/oracle11g-lab-app.password
+
+volumes:
+  oracle11g_data:

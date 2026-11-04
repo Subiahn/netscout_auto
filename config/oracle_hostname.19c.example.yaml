@@ -1,0 +1,22 @@
+oracle:
+  # TNS alias 또는 //host:1521/service_name
+  connect_identifier: "HOSTNAME_DB"
+  username: "NETSCOUT_READONLY"
+  tns_admin: "C:/Oracle/network/admin"
+  nls_lang: "KOREAN_KOREA.AL32UTF8"
+  sqlplus_command:
+    - "tools/oracle/instantclient_19_33/sqlplus.exe"
+    - "-s"
+    - "/nolog"
+  password_file: "oracle_hostname.password"
+  timeout: 120
+
+query:
+  sql: >-
+    SELECT HOSTNAME
+    FROM NETWORK_HOSTNAME_MAP
+    WHERE IP_ADDRESS = '{{IP}}'
+      AND ROWNUM = 1
+
+output:
+  source_name: "Oracle Hostname DB via Instant Client 19c"

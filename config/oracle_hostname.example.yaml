@@ -1,0 +1,26 @@
+oracle:
+  # TNS alias (tnsnames.ora) 또는 //host:1521/service_name
+  connect_identifier: "HOSTNAME_DB"
+  username: "NETSCOUT_READONLY"
+  # tnsnames.ora가 있는 디렉터리. Easy Connect 사용 시 빈 문자열 가능.
+  tns_admin: "C:/Oracle/network/admin"
+  nls_lang: "KOREAN_KOREA.AL32UTF8"
+  sqlplus_command:
+    - "sqlplus"
+    - "-s"
+    - "/nolog"
+  # config 파일 기준 상대 경로. 파일에는 비밀번호 한 줄만 저장한다.
+  password_file: "oracle_hostname.password"
+  timeout: 120
+
+query:
+  # {{IP}}는 IP 주소 검증 후 안전한 값으로 치환된다.
+  # 실제 테이블명과 컬럼명은 DBA가 제공한 읽기 전용 쿼리로 변경한다.
+  sql: >-
+    SELECT HOSTNAME
+    FROM NETWORK_HOSTNAME_MAP
+    WHERE IP_ADDRESS = '{{IP}}'
+      AND ROWNUM = 1
+
+output:
+  source_name: "Oracle Hostname DB"
