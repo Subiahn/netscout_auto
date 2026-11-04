@@ -7,12 +7,7 @@ from openpyxl import load_workbook
 HEADERS = ['Register', 'ApplicationName', 'RegistrationType', 'ParentApplication', 'Protocol', 'IP', 'Port', 'Description', 'ApplicationGroup', 'ApplicationTag', 'ClientAddresses', 'ClientPortRange', 'URLAddress', 'ExactMatch', 'ErrorCodeFormat', 'Parameter', 'Logged', 'ResponseTime', 'Session', 'RecordingType', 'RecordingSize', 'Fast', 'Expected', 'Degraded', 'ServiceLevel', 'Availability']
 INVALID = set('`~!@#$%^&*+=|\\"\'<>?')
 MODES = {'SBA': 'Server-based Apps', 'WKA': 'Well Known Apps', 'CHILD': 'Well Known Apps', 'URL': 'URL Application'}
-META = {
-    'Application', 'Hostname', 'Found', 'Site', 'Source URL', 'Error',
-    'Source Sheet', 'Source Row', 'Review', 'SourceApplication',
-    'DeviceCount', 'InterfaceCount', 'EvidenceCount', 'Devices', 'Interfaces',
-    'PolicyRule',
-}
+META = {'Application', 'Hostname', 'Found', 'Site', 'Source URL', 'Error', 'Source Sheet', 'Source Row', 'Review'}
 
 def text(v):
     if v is None: return ''

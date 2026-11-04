@@ -1,6 +1,6 @@
-# netscout-auto v0.9.1
+# netscout-auto v0.90
 
-v0.9.1은 v0.90 기능에 다중 장비·다중 인터페이스 등록 준비 파이프라인을 추가합니다. 실제 등록은 안전성을 위해 기존 독립 동기화 도구로 수행합니다.
+v0.90는 검증된 조회·분석·후처리 CLI와 Application 등록 동기화 도구를 하나의 정제된 릴리스로 제공합니다. 등록 기능은 안전성을 위해 독립 도구로 유지합니다.
 
 > 공개 저장소의 서버 주소, IP, 계정, 비밀번호, 장비명은 모두 **더미 데이터**입니다. `CHANGE_ME` 값은 실제 환경에 맞게 로컬에서만 변경하고 실제 설정·암호 파일은 Git에 커밋하지 마십시오.
 
@@ -13,7 +13,6 @@ v0.9.1은 v0.90 기능에 다중 장비·다중 인터페이스 등록 준비 �
 - [Windows 수동 검증 가이드](MANUAL_VALIDATION_GUIDE_V0_90.md)
 - [Ubuntu 수동 검증 가이드](MANUAL_VALIDATION_GUIDE_V0_90_UBUNTU.md)
 - [파일명을 지정하지 않는 수동 테스트](MANUAL_TEST_WITH_DEFAULT_FILENAMES_V0_90.md)
-- [v0.9.1 다중 장비 등록 자동화 가이드](V091_MULTI_DEVICE_REGISTRATION_GUIDE.md)
 
 ## 핵심 변경점
 

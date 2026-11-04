@@ -14,9 +14,6 @@ docker/hostname-lab/hostname_lookup_*.xlsx
 config/.env.local
 config/oracle_hostname.yaml
 config/*.password
-config/collection_scope.yaml
-config/detail_scope.yaml
-config/registration_policy.yaml
 tools/oracle/instantclient_*/
 config/oracle_network/tnsnames.ora
 pure_xlsx/*

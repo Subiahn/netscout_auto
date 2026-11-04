@@ -1,4 +1,4 @@
-"""NETSCOUT Automation v0.9.1 CLI.
+"""NETSCOUT Automation v0.90 CLI.
 
 V8은 사람이 중간 결과를 확인하면서 다음 실행 대상을 고르는 구조다.
 그래서 단일 실행 명령뿐 아니라 YAML 생성/읽기 명령도 CLI에 포함한다.
@@ -70,7 +70,7 @@ def configure_logging(debug: bool = False) -> None:
 
 
 def build_parser() -> argparse.ArgumentParser:
-    parser = argparse.ArgumentParser(description="NETSCOUT Automation v0.9.1. Inventory / TopN / Detail / Postprocess.")
+    parser = argparse.ArgumentParser(description="NETSCOUT Automation v0.90. Inventory / TopN / Detail / Postprocess.")
     # 기존 작업 습관에 맞춰 `--top` 같은 플래그형 alias와 `top` 서브커맨드를 모두 지원한다.
     parser.add_argument("--debug", action="store_true", help="DEBUG 로그를 출력한다.")
     parser.add_argument("--inventory", action="store_true", help="Application / Device / Interface 전체 목록을 조회한다.")
@@ -235,7 +235,7 @@ def main(argv: list[str] | None = None) -> int:
             output = staged_output_path(args.output_dir, "00_inventory", args.output_file, "Netscout_Inventory")
             path = export_inventory_xlsx(inventory, output)
             append_run_summary(args.output_dir, f"inventory output={path} rows={len(inventory.applications) + len(inventory.devices) + len(inventory.interfaces)}")
-            logger.info("v0.9.1 inventory completed applications=%s devices=%s interfaces=%s output=%s", len(inventory.applications), len(inventory.devices), len(inventory.interfaces), path)
+            logger.info("v0.90 inventory completed applications=%s devices=%s interfaces=%s output=%s", len(inventory.applications), len(inventory.devices), len(inventory.interfaces), path)
             return 0
         if args.command == "step1-list":
             settings = load_settings(args.config, resolve_env_path(args.env))
@@ -279,7 +279,7 @@ def main(argv: list[str] | None = None) -> int:
                 args.device_filter,
                 args.interface_filter,
             )
-            logger.info("v0.9.1 targets YAML completed targets=%s output=%s", result.targets_count, result.output_path)
+            logger.info("v0.90 targets YAML completed targets=%s output=%s", result.targets_count, result.output_path)
             return 0
         if args.command == "run-targets":
             settings = load_settings(args.config, resolve_env_path(args.env))
@@ -296,7 +296,7 @@ def main(argv: list[str] | None = None) -> int:
                     row["error"],
                 )
             logger.info(
-                "v0.9.1 run-targets completed planned=%s success=%s failed=%s skipped=%s dry_run=%s",
+                "v0.90 run-targets completed planned=%s success=%s failed=%s skipped=%s dry_run=%s",
                 result.planned_count,
                 result.success_count,
                 result.failure_count,
@@ -310,7 +310,7 @@ def main(argv: list[str] | None = None) -> int:
             if output == DEFAULT_DETAIL_TARGETS_YAML:
                 output = default_detail_targets_output(args.top_xlsx)
             result = run_detail_targets_yaml(args.top_xlsx, output, args.detail_top_n, args.limit, args.dedup_ip)
-            logger.info("v0.9.1 detail targets YAML completed targets=%s output=%s", result.targets_count, result.output_path)
+            logger.info("v0.90 detail targets YAML completed targets=%s output=%s", result.targets_count, result.output_path)
             return 0
         if args.command == "run-detail-targets":
             settings = load_settings(args.config, resolve_env_path(args.env))
@@ -330,7 +330,7 @@ def main(argv: list[str] | None = None) -> int:
                     row["error"],
                 )
             logger.info(
-                "v0.9.1 run-detail-targets completed planned=%s success=%s failed=%s skipped=%s dry_run=%s",
+                "v0.90 run-detail-targets completed planned=%s success=%s failed=%s skipped=%s dry_run=%s",
                 result.planned_count,
                 result.success_count,
                 result.failure_count,
@@ -352,7 +352,7 @@ def main(argv: list[str] | None = None) -> int:
                     row.get("unknown_port_rows", ""),
                 )
             logger.info(
-                "v0.9.1 postprocess completed date_root=%s planned=%s skipped=%s hostname_lookup=%s",
+                "v0.90 postprocess completed date_root=%s planned=%s skipped=%s hostname_lookup=%s",
                 result.get("date_root", ""),
                 result.get("planned_count", 0),
                 result.get("skipped_count", 0),
@@ -370,7 +370,7 @@ def main(argv: list[str] | None = None) -> int:
                 applications=args.applications,
             )
             logger.info(
-                "v0.9.1 extract-candidates completed output=%s yaml_output=%s candidate_rows=%s unique_ip_ports=%s unknown_port_rows=%s",
+                "v0.90 extract-candidates completed output=%s yaml_output=%s candidate_rows=%s unique_ip_ports=%s unknown_port_rows=%s",
                 xlsx_path,
                 yaml_path or "",
                 stats.get("candidate_rows", 0),
@@ -380,7 +380,7 @@ def main(argv: list[str] | None = None) -> int:
             return 0
         if args.command == "hostname-lookup":
             output = run_hostname_lookup(args.input, args.config, args.output)
-            logger.info("v0.9.1 hostname-lookup completed output=%s", output)
+            logger.info("v0.90 hostname-lookup completed output=%s", output)
             return 0
         if args.command == "compare-inventory-apps":
             module = load_tool_module("compare_inventory_apps.py", "netscout_auto_compare_inventory_apps_cli")
@@ -393,7 +393,7 @@ def main(argv: list[str] | None = None) -> int:
                 args.key_column,
             )
             logger.info(
-                "v0.9.1 compare-inventory-apps completed pure_rows=%s current_rows=%s manual_candidate_rows=%s output=%s yaml_output=%s",
+                "v0.90 compare-inventory-apps completed pure_rows=%s current_rows=%s manual_candidate_rows=%s output=%s yaml_output=%s",
                 pure_count,
                 current_count,
                 diff_count,
@@ -412,7 +412,7 @@ def main(argv: list[str] | None = None) -> int:
             )
             output_path = "" if args.dry_run else str(module.save_yaml(filtered_yaml, args.output))
             logger.info(
-                "v0.9.1 filter-detail-targets completed top_targets=%s manual_apps=%s disabled=%s protected=%s already_disabled=%s output=%s",
+                "v0.90 filter-detail-targets completed top_targets=%s manual_apps=%s disabled=%s protected=%s already_disabled=%s output=%s",
                 stats["top_targets"],
                 stats["manual_apps"],
                 stats["disabled"],
@@ -467,7 +467,7 @@ def resolve_env_path(env_path: str) -> str:
 
 
 def default_detail_targets_output(top_xlsx: str) -> Path:
-    """Top Excel 경로를 기준으로 v0.9.1 `02_targets/detail_targets.yaml` 기본 경로를 만든다."""
+    """Top Excel 경로를 기준으로 v0.90 `02_targets/detail_targets.yaml` 기본 경로를 만든다."""
     top_path = Path(top_xlsx)
     if top_path.parent.name == "01_top":
         return top_path.parent.parent / "02_targets" / "detail_targets.yaml"
