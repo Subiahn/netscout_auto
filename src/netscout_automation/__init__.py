@@ -1,6 +1,6 @@
-"""NETSCOUT Automation v0.90 package."""
+"""NETSCOUT Automation v0.9.1 package."""
 
-__version__ = "8.8"
+__version__ = "0.9.1"
 
 __all__ = [
     "client",

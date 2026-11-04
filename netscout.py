@@ -1,4 +1,4 @@
-"""NETSCOUT Automation v0.90 command entry point.
+"""NETSCOUT Automation v0.9.1 command entry point.
 
 Run from this folder:
 
