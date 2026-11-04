@@ -12,6 +12,7 @@ v0.90는 검증된 조회·분석·후처리 CLI와 Application 등록 동기화
 - [공개용 E2E 검증 결과](E2E_TEST_REPORT_V0_90_PUBLIC.md)
 - [Windows 수동 검증 가이드](MANUAL_VALIDATION_GUIDE_V0_90.md)
 - [Ubuntu 수동 검증 가이드](MANUAL_VALIDATION_GUIDE_V0_90_UBUNTU.md)
+- [파일명을 지정하지 않는 수동 테스트](MANUAL_TEST_WITH_DEFAULT_FILENAMES_V0_90.md)
 
 ## 핵심 변경점
 
